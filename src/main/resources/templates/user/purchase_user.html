@@ -160,24 +160,35 @@
 						</td>
 				  </tr>
                 </div>
-                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-5 pull-left">
-					<div >
-						<h2>Điền thông tin của bạn</h2>
-					</div>
-					<div class="form-group">
-						<label for="username" ><span style="color: red;">*</span><strong>Họ và tên</strong></label>
-						<input name = "fullname" type="text" class="form-control" style="width: 500px; " id="bookname" required>
-					</div>
-					<div class="form-group">
-						<label for="username"><span style="color: red;">*</span><strong>Số điện thoại</strong></label>
-						<input name="phone" type="text" class="form-control" style="width: 500px;" id="bookname" required>
-					</div>
-					<div class="form-group">
-						<label for="username"><span style="color: red;">*</span><strong >Địa chỉ giao hàng</strong></label>
-						<input name="address" type="text" class="form-control"  style="width: 500px;" id="bookname" required>
-					</div>
-						<button type="submit" class="btn btn-primary" style="background: green; width: 200px" id ="confirm_btn">Xác nhận đơn đặt hàng</button>
-                </div>
+                
+				<div class="col-xs-12 col-sm-6 col-md-6 col-lg-5 pull-left">
+    <div>
+        <h2>Điền thông tin của bạn</h2>
+    </div>
+
+    <!-- Thêm thẻ form -->
+    <form action="/confirm" method="post">
+        <div class="form-group">
+            <label for="fullname"><span style="color: red;">*</span><strong>Họ và tên</strong></label>
+            <input name="fullname" type="text" class="form-control" style="width: 500px;" id="fullname" required>
+        </div>
+
+        <div class="form-group">
+            <label for="phone"><span style="color: red;">*</span><strong>Số điện thoại</strong></label>
+            <input name="phone" type="text" class="form-control" style="width: 500px;" id="phone" required>
+        </div>
+
+        <div class="form-group">
+            <label for="address"><span style="color: red;">*</span><strong>Địa chỉ giao hàng</strong></label>
+            <input name="address" type="text" class="form-control" style="width: 500px;" id="address" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="background: green; width: 200px;" id="confirm_btn">
+            Xác nhận đơn đặt hàng
+        </button>
+    </form>
+</div>
+
             </div>
             </form>
         </div>

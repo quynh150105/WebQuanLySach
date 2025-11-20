@@ -96,20 +96,43 @@ public class UserController {
 		return "user/purchase_user";
 	}
 	
-	@PostMapping("/confirm")
-	public String confirm(HttpServletRequest request, Model model) {
-		Order order = new Order(request);
-		String username = request.getRemoteUser();
-		Account account = accountService.findByUsername(username);
-		User user = userService.findByAccount(account);
-		order.setUser(user);
-		order = orderService.save(order);
-		model.addAttribute("order", order);
-		Utils.removeCartInSession(request);
-		CartInfo cartInfo = Utils.getCartInSession(request);
-		model.addAttribute("cartInfo", cartInfo);
-		return "user/orderedDetail_user";
-	}
+@PostMapping("/confirm")
+public String confirm(HttpServletRequest request, Model model) {
+    try {
+        Order order = new Order(request);
+
+        String username = request.getRemoteUser(); // hoặc request.getParameter("username") nếu chưa login
+        if(username == null) {
+            throw new IllegalStateException("Chưa đăng nhập, không thể đặt hàng.");
+        }
+
+        Account account = accountService.findByUsername(username);
+        if(account == null) {
+            throw new IllegalStateException("Account không tồn tại.");
+        }
+
+        User user = userService.findByAccount(account);
+        if(user == null) {
+            throw new IllegalStateException("User không tồn tại.");
+        }
+
+        order.setUser(user);
+        order = orderService.save(order);
+        model.addAttribute("order", order);
+
+        Utils.removeCartInSession(request);
+        CartInfo cartInfo = Utils.getCartInSession(request);
+        if(cartInfo == null) cartInfo = new CartInfo();
+        model.addAttribute("cartInfo", cartInfo);
+
+        return "user/orderedDetail_user";
+    } catch (Exception e) {
+        e.printStackTrace();
+        model.addAttribute("error", e.getMessage());
+        return "user/error";
+    }
+}
+
 	
 	//Order
 	@GetMapping("/orders")
