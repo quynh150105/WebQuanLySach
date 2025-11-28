@@ -176,7 +176,12 @@
 						<label for="username"><span style="color: red;">*</span><strong >Địa chỉ giao hàng</strong></label>
 						<input name="address" type="text" class="form-control"  style="width: 500px;" id="bookname" required>
 					</div>
-						<button type="submit" class="btn btn-primary" style="background: green; width: 200px" id ="confirm_btn">Xác nhận đơn đặt hàng</button>
+					<form action="/confirm" method="post">
+						<!-- các input -->
+						<button type="submit" class="btn btn-primary" style="background: green; width: 200px" id ="confirm_btn">Confirm</button>
+					</form>
+<!--						<button type="submit" class="btn btn-primary" style="background: green; width: 200px" id ="confirm_btn">Xác nhận đơn đặt hàng</button>-->
+
                 </div>
             </div>
             </form>

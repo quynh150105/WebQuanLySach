@@ -53,6 +53,10 @@ public class UserController {
 	public String saveComment(Model model, HttpServletRequest request,
 							  @ModelAttribute Comment comment) {
 		comment = commentService.save(comment, request);
+		if (comment.getBook() == null || comment.getBook().getId() == null) {
+			// Trường hợp book null → redirect về trang mặc định
+			return "redirect:/";
+		}
 		return "redirect:/detail-product?id=" + comment.getBook().getId();
 	}
 	

@@ -10,6 +10,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.thunga.web.service.AccountService;
+import org.springframework.security.web.firewall.StrictHttpFirewall;
 
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
@@ -51,6 +52,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 	        .usernameParameter("username")
 	        .passwordParameter("password")
 	        .and().logout().logoutUrl("/logout").logoutSuccessUrl("/");
+	}
+
+	@Bean
+	public StrictHttpFirewall httpFirewall() {
+		StrictHttpFirewall firewall = new StrictHttpFirewall();
+		firewall.setAllowUrlEncodedSlash(true);           // cho phép / trong query
+		firewall.setAllowSemicolon(true);                 // cho phép ;
+		firewall.setAllowBackSlash(false);                // vẫn chặn \
+		firewall.setAllowUrlEncodedDoubleSlash(true);     // quan trọng: CHO PHÉP //
+		return firewall;
 	}
 
 }
